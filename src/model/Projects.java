@@ -1,6 +1,9 @@
 package model;
 
 import java.sql.Date;
+import java.util.Calendar;
+
+import javafx.stage.Stage;
 
 public class Projects {
     
@@ -11,10 +14,14 @@ private String projectName;
 private String clientName;
 
 //initial date of the project
-private Date initialDate;
+private int iDay;
+private int iMouth;
+private int iYear;
 
 //final date of the project
-private Date finalDate;
+private int fDay;
+private int fMouth;
+private int fYear;
 
 //budget of the project
 private Double budget;
@@ -31,12 +38,24 @@ private int clientPhone;
 //phone number of the GreenSQ client
 private int greenPhone;
 
-    public Projects(String projectName,String clientName, Date initialDate, Date finalDate, Double budget, String managName,String greenName,int clientPhone, int greenPhone){
+private Stage[] fase;
+
+	public Projects() {
+
+		fase = new Stage[6];
+
+	}
+
+    public Projects(String projectName,String clientName, Double budget, String managName,String greenName,int clientPhone, int greenPhone, int iDay, int iMouth, int iYear, int fDay, int fMouth, int fYear){
 
         this.projectName = projectName;
         this.clientName = clientName;
-        this.initialDate = initialDate;
-        this.finalDate = finalDate;
+        this.iDay = iDay;
+        this.iMouth = iMouth;
+        this.iYear = iYear;
+        this.fDay = iDay;
+        this.fYear =  fYear;
+        this.fMouth = fMouth;
         this.budget = budget;
         this.managName = managName;
         this.greenName = greenName;
@@ -44,6 +63,20 @@ private int greenPhone;
         this.greenPhone = greenPhone;
 
     }
+
+    public boolean nextStage(int nowStage, int iInitalPlanned, int mInitalPlanned, int yInitialPlanned, int dFinalPlanned, int mFinalPlanned, int yFinalPlanned, int dInitalReal, int mInitialReal, int yInitialReal,int dFinalReal, int mFinalReal, int yFinalReal, int durationMonths, boolean isActive) {
+
+        Stage newStage = new Stage(nowStage, iInitalPlanned, mInitalPlanned, yInitialPlanned, dFinalPlanned, mFinalPlanned, yFinalPlanned, dInitalReal, mInitialReal, yInitialReal, dFinalReal, mFinalReal, yFinalReal, durationMonths, isActive);
+
+        for(int i = 0; i < fase.length; i++){
+            if(newProject == true){
+                fase[i] = newStage;
+                return true;
+            }
+        }
+        return false;
+    }
+    
 
     public String getProjectName() {
         return projectName;
@@ -61,20 +94,28 @@ private int greenPhone;
         this.clientName = clientName;
     }
     
-    public Date getInitialDate() {
-        return initialDate;
+    public int getiMouth() {
+        return iMouth;
+    }
+
+    public int getiDay() {
+        return iDay;
+    }
+
+    public int getiYear() {
+        return iYear;
     }
     
-    public void setInitialDate(Date initialDate) {
-        this.initialDate = initialDate;
+    public int getfMouth() {
+        return fMouth;
     }
-    
-    public Date getFinalDate() {
-        return finalDate;
+
+    public int getfDay() {
+        return fDay;
     }
-    
-    public void setFinalDate(Date finalDate) {
-        this.finalDate = finalDate;
+
+    public int getfYear() {
+        return fYear;
     }
     
     public Double getBudget() {
