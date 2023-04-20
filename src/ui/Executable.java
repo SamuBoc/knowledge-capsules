@@ -18,6 +18,7 @@ public class Executable {
 		controller = new Controller();
 	}
 
+
 	public static void main(String[] args) {
 
 		Executable ejecutable = new Executable();
@@ -102,10 +103,9 @@ public class Executable {
 	
 		System.out.println("Type the green leader phone number:");
 		int greenPhone = reader.nextInt();
-			
+		
 
-		if (controller.addProject(name, clientName, budget, managName, greenName, clientPhone, greenPhone, iDay, iMouth, iYear, fDay, fMouth, fYear)) {
-   		System.out.println("Project added successfully!");
+		//Question of create the new stage (initial)
 
 		System.out.print("What is the estimated number of months for the first stage?");
 		int durationMonths = reader.nextInt();
@@ -119,10 +119,8 @@ public class Executable {
    
 		Boolean newProject = true;
 
-		controller.approved()
-
-		System.out.println("");
-
+		if (controller.addProject(name, clientName, budget, managName, greenName, clientPhone, greenPhone, iDay, iMouth, iYear, fDay, fMouth, fYear)) {
+   		System.out.println("Project added successfully!");
 		} else {
     	System.out.println("Could not add project. Project list is full.");
 		}
