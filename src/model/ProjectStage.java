@@ -34,6 +34,7 @@ public class ProjectStage {
 
     public ProjectStage(int iInitalPlanned, int mInitalPlanned, int yInitialPlanned, int dFinalPlanned, int mFinalPlanned, int yFinalPlanned, int dInitalReal, int mInitialReal, int yInitialReal,int dFinalReal, int mFinalReal, int yFinalReal, int durationMonths, boolean isActive,String nameStage){
         
+
         this.iInitalPlanned = iInitalPlanned;
         this.mInitalPlanned = mInitalPlanned;
         this.yInitialPlanned = yInitialPlanned;

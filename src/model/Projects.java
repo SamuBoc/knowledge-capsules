@@ -25,16 +25,6 @@ public class Projects {
     private int fMouthP;
     private int fYearP;
 
-    // iniital real date
-    private int iDayR;
-    private int iMouthR;
-    private int iYearR;
-
-    // initial real finish
-    private int fDayR;
-    private int fMouthR;
-    private int fYearR;
-
     // budget of the project
     private Double budget;
 
@@ -55,16 +45,14 @@ public class Projects {
 
     private ProjectStage[] projectStages;
 
-    public Projects(String projectName, String clientName, Double budget, String managName, String greenName,
-            int clientPhone, int greenPhone, int iDayP, int iMouthP, int iYearP, int fDayP, int fMouthP, int fYearP,
-            int iDayR, int iMouthR, int iYearR) {
+    private String[] sName = { "initiation", "planning", "design", "execution", "closure", "monitoring and control" };
+
+    public Projects(String projectName, String clientName, Double budget, String managName, String greenName, int clientPhone, int greenPhone, int iDayP, int iMouthP, int iYearP, int fDayP, int fMouthP, int fYearP) {
 
         this.projectStages = new ProjectStage[6];
-
-        String[] sName = { "initiation", "planning", "design", "execution", "closure", "monitoring and control" };
-
+        
         // inititation
-        nextStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, true, sName[0]);
+        nextStage(iDayP, iMouthP, iYearP, 0, 0, 0, iDayP, iMouthP, iMouthP, 0, 0, 0, 0, true, sName[0]);
         // planning
         nextStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[1]);
         // desing
@@ -103,6 +91,8 @@ public class Projects {
         int position = 0;
 
         for (int i = 0; i < 6; i++) {
+
+            
 
         }
 
@@ -152,34 +142,6 @@ public class Projects {
         return fDayP;
     }
 
-    public int getfYearP() {
-        return fYearR;
-    }
-
-    public int getiMouthR() {
-        return iMouthR;
-    }
-
-    public int getiDayR() {
-        return iDayR;
-    }
-
-    public int getiYearR() {
-        return iYearR;
-    }
-
-    public int getfMouthR() {
-        return fMouthR;
-    }
-
-    public int getfDayR() {
-        return fDayR;
-    }
-
-    public int getfYearR() {
-        return fYearR;
-    }
-
     public Double getBudget() {
         return budget;
     }
@@ -226,6 +188,14 @@ public class Projects {
 
     public void setprojectStages(ProjectStage[] projectStages) {
         this.projectStage = projectStage;
+    }
+
+    public String[] getsName() {
+        return sName;
+    }
+
+    public void setsName(String[] sName) {
+        this.sName = sName;
     }
 
 }
