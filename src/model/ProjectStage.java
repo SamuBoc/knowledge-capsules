@@ -4,17 +4,16 @@ import java.sql.Date;
 
 import javax.print.DocFlavor.STRING;
 
-public class Stage {
+public class ProjectStage {
  
     private KnowledgeUnit[] capsules;
 
-    public Stage() {
+    public ProjectStage() {
         
         capsules = new KnowledgeUnit[50];
 
     }
 
-    private int nowStage;
     private int iInitalPlanned;
     private int mInitalPlanned;
     private int yInitialPlanned;
@@ -29,9 +28,12 @@ public class Stage {
     private int yFinalReal;
     private int durationMonths;
     private boolean isActive;
+    private String nameStage;
 
-    public Stage(int nowStage, int iInitalPlanned, int mInitalPlanned, int yInitialPlanned, int dFinalPlanned, int mFinalPlanned, int yFinalPlanned, int dInitalReal, int mInitialReal, int yInitialReal,int dFinalReal, int mFinalReal, int yFinalReal, int durationMonths, boolean isActive){
-        this.nowStage = nowStage;
+//
+
+    public ProjectStage(int iInitalPlanned, int mInitalPlanned, int yInitialPlanned, int dFinalPlanned, int mFinalPlanned, int yFinalPlanned, int dInitalReal, int mInitialReal, int yInitialReal,int dFinalReal, int mFinalReal, int yFinalReal, int durationMonths, boolean isActive,String nameStage){
+        
         this.iInitalPlanned = iInitalPlanned;
         this.mInitalPlanned = mInitalPlanned;
         this.yInitialPlanned = yInitialPlanned;
@@ -46,6 +48,7 @@ public class Stage {
         this.yFinalReal = yFinalReal;
         this.durationMonths = durationMonths;
         this.isActive = isActive;
+        this.nameStage = nameStage;
     }
     
 
@@ -120,14 +123,6 @@ public class Stage {
 		return msg;
 
 	}
-
-    public int getNowStage() {
-        return nowStage;
-    }
-    
-    public void setNowStage(int nowStage) {
-        this.nowStage = nowStage;
-    }
     
     public int getiInitalPlanned() {
         return iInitalPlanned;
@@ -241,6 +236,12 @@ public class Stage {
         this.isActive = isActive;
     }
     
+    public void setmnameStage(String nameStage) {
+        this.nameStage = nameStage;
+    }
     
+    public String getnameStage() {
+        return nameStage;
+    }
 
 }

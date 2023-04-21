@@ -1,7 +1,10 @@
 package model;
 
+
 import java.sql.Date;
 import java.util.Calendar;
+
+import javax.swing.text.Position;
 
 import javafx.stage.Stage;
 
@@ -38,22 +41,34 @@ private int clientPhone;
 //phone number of the GreenSQ client
 private int greenPhone;
 
-private Stage[] fase;
+//Create Objet Stage
+private ProjectStage projectStage;
 
-	public Projects() {
 
-		fase = new Stage[6];
+private ProjectStage[] projectStages;
 
-	}
 
     public Projects(String projectName,String clientName, Double budget, String managName,String greenName,int clientPhone, int greenPhone, int iDay, int iMouth, int iYear, int fDay, int fMouth, int fYear){
+
+        this.projectStages = new ProjectStage[6];
+
+        String[] sName = {"initiation", "planning", "design", "execution", "closure", "monitoring and control"};
+
+        
+
+        ProjectStage[0] = nextStage(null,null, null,null,null, null,null,null, null,null, null, null, null, null, null);
+        nextStage(sName[1], null, null, "inactiva");
+        nextStage(sName[2], null, null, "Inactiva");
+        nextStage(sName[3], null, null, "Inactiva");
+        nextStage(sName[4], null, null, "Inactiva");
+        nextStage(sName[5], null, null, "Inactiva");
 
         this.projectName = projectName;
         this.clientName = clientName;
         this.iDay = iDay;
         this.iMouth = iMouth;
         this.iYear = iYear;
-        this.fDay = iDay;
+        this.fDay = fDay;
         this.fYear =  fYear;
         this.fMouth = fMouth;
         this.budget = budget;
@@ -64,19 +79,30 @@ private Stage[] fase;
 
     }
 
-    public boolean nextStage(int nowStage, int iInitalPlanned, int mInitalPlanned, int yInitialPlanned, int dFinalPlanned, int mFinalPlanned, int yFinalPlanned, int dInitalReal, int mInitialReal, int yInitialReal,int dFinalReal, int mFinalReal, int yFinalReal, int durationMonths, boolean isActive) {
+    public boolean nextStage(int iInitalPlanned, int mInitalPlanned, int yInitialPlanned, int dFinalPlanned, int mFinalPlanned, int yFinalPlanned, int dInitalReal, int mInitialReal, int yInitialReal,int dFinalReal, int mFinalReal, int yFinalReal, int durationMonths, boolean isActive, String nameStage) {
 
-        Stage newStage = new Stage(nowStage, iInitalPlanned, mInitalPlanned, yInitialPlanned, dFinalPlanned, mFinalPlanned, yFinalPlanned, dInitalReal, mInitialReal, yInitialReal, dFinalReal, mFinalReal, yFinalReal, durationMonths, isActive);
+        
 
-        for(int i = 0; i < fase.length; i++){
-            if(newProject == true){
-                fase[i] = newStage;
-                return true;
-            }
+        ProjectStage miStage = new ProjectStage( iInitalPlanned,  mInitalPlanned,  yInitialPlanned,  dFinalPlanned,  mFinalPlanned,  yFinalPlanned,  dInitalReal,  mInitialReal,  yInitialReal, dFinalReal,  mFinalReal,  yFinalReal,  durationMonths,  isActive, nameStage);
+        
+        int position = 0;
+
+        for(int i=0;i<ProjectStage.length;i++){
+            
+           
+
         }
+
+        
         return false;
     }
     
+    //for(int i = 0; i < stages.length; i++){
+    //    if(newProject == true){
+    //        stages[i] = newStage;
+    //        return true;
+    //    }
+    //}
 
     public String getProjectName() {
         return projectName;
@@ -158,6 +184,13 @@ private Stage[] fase;
         this.greenPhone = greenPhone;
     }
     
+    public ProjectStage[] getProjectStages() {
+        return projectStages;
+    }
+
+    public void setprojectStages(ProjectStage[] projectStages) {
+        this.projectStage = projectStage;
+    }
 
 
 }

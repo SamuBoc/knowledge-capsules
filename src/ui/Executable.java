@@ -105,26 +105,27 @@ public class Executable {
 		int greenPhone = reader.nextInt();
 		
 
-		//Question of create the new stage (initial)
+		//Question of create the new stage(initial)
 
 		System.out.print("What is the estimated number of months for the first stage?");
 		int durationMonths = reader.nextInt();
 
 		System.out.println("Type the final day estimated(dd):");
 		int fDayStage = reader.nextInt();
+
 		System.out.println("Type the final mouth estimated(MM):");
 		int fMouthStage = reader.nextInt();
+		
 		System.out.println("Type the final year estimated(yyyy):");
 		int fYearStage = reader.nextInt();
    
 		Boolean newProject = true;
 
-		if (controller.addProject(name, clientName, budget, managName, greenName, clientPhone, greenPhone, iDay, iMouth, iYear, fDay, fMouth, fYear)) {
-   		System.out.println("Project added successfully!");
+		if (controller.addProject(name, clientName, budget, managName, greenName, clientPhone, greenPhone, iDay, iMouth, iYear, fDay, fMouth, fYear, durationMonths, fDayStage, fMouthStage, fYearStage)) {
+		System.out.println("Project added successfully!");
 		} else {
     	System.out.println("Could not add project. Project list is full.");
 		}
-	
 	}
 
 
