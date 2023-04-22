@@ -1,68 +1,130 @@
 package model;
 
+import java.text.ParseException;
+import java.util.Calendar;
+
 public class KnowledgeUnit {
 
 	private String id;
 	private String description;
-	private String type;
 	private String learnedLessons;
-	private String status;
+	private String hashtag;
+	private boolean statusPrivacy;
+	private Calendar publicDate;
+	private Typeknowledge typeknowledege;
+	private String nameAuthor;
+	private String chargeAuthor;
+	private Revision revision;
 
-	public KnowledgeUnit(String id, String description, String type, String learnedLessons) {
 
+	public KnowledgeUnit(String id, String description, Typeknowledge typeknowledge, String nameAuthor, String learnedLessons, String chargeAuthor, String hashtag) {
+
+		//variables inputs
 		this.id = id;
 		this.description = description;
-		this.type = type;
-		this.learnedLessons = learnedLessons;
-		this.status = "Por definir";
+		this.typeknowledege = typeknowledege;
+		this.nameAuthor = nameAuthor;
+		this.chargeAuthor = chargeAuthor;
+		this.hashtag = hashtag;
+
+		//variables no outputs in the create
+		this.statusPrivacy = false;
+		this.revision = revision;
+		
+
+
+	}
+
+	public String getPublicDate() throws ParseException{
+		return formatter.format(this.initialReal.getTime()); 
 	}
 
 	public String getId() {
-		return id;
-	}
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getLearnedLessons() {
+        return learnedLessons;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setLearnedLessons(String learnedLessons) {
+        this.learnedLessons = learnedLessons;
+    }
 
-	public String getLearnedLessons() {
-		return learnedLessons;
-	}
+    public String getHashtag() {
+        return hashtag;
+    }
 
-	public void setLearnedLessons(String learnedLessons) {
-		this.learnedLessons = learnedLessons;
-	}
+    public void setHashtag(String hashtag) {
+        this.hashtag = hashtag;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public boolean isStatusPrivacy() {
+        return statusPrivacy;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setStatusPrivacy(boolean statusPrivacy) {
+        this.statusPrivacy = statusPrivacy;
+    }
+
+    public Calendar getPublicDate() {
+        return publicDate;
+    }
+
+    public void setPublicDate(Calendar publicDate) {
+        this.publicDate = publicDate;
+    }
+
+    public Typeknowledge getTypeknowledege() {
+        return typeknowledege;
+    }
+
+    public void setTypeknowledege(Typeknowledge typeknowledege) {
+        this.typeknowledege = typeknowledege;
+    }
+
+    public String getNameAuthor() {
+        return nameAuthor;
+    }
+
+    public void setNameAuthor(String nameAuthor) {
+        this.nameAuthor = nameAuthor;
+    }
+
+    public String getChargeAuthor() {
+        return chargeAuthor;
+    }
+
+    public void setChargeAuthor(String chargeAuthor) {
+        this.chargeAuthor = chargeAuthor;
+    }
+
+    public Revision getRevision() {
+        return revision;
+    }
+
+    public void setRevision(Revision revision) {
+        this.revision = revision;
+    }
 
 	public String toString() {
 
 		String msg = "";
 
-		msg = "ID: " + id + "\nDescripcion: " + description + "\nTipo: " + type + "\nLecciones aprendidas: "
-				+ learnedLessons + "\nStatus: " + status;
+		msg = "ID: " + id + "\nDescripcion: " + description + "\nTipo: " + typeknowledege + "\nLecciones aprendidas: "
+				+ learnedLessons + "\nStatus: " + revision;
 
 		return msg;
 
