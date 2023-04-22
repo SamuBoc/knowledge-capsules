@@ -55,7 +55,7 @@ public class Executable {
 				break;
 
 			case 3:
-				controller.showstages();
+				infoProjects();
 				break;
 
 			case 4:
@@ -78,7 +78,7 @@ public class Executable {
 	
 		System.out.println("Type the name of the client:");
 		String clientName = reader.nextLine();
-		reader.nextLine(); // Consumir el carácter \n adicional
+		
 
 		System.out.println("Type the initial day (dd):");
 		int iDay = reader.nextInt();
@@ -107,11 +107,11 @@ public class Executable {
 		
 		System.out.println("Type the name of the project manager:");
 		String managName = reader.nextLine();
-		reader.nextLine(); // Consumir el carácter \n adicional
+		
 
 		System.out.println("Type the name of the green leader:");
 		String greenName = reader.nextLine();
-		reader.nextLine(); // Consumir el carácter \n adicional
+		
 		
 		System.out.println("Type the client phone number:");
 		int clientPhone = reader.nextInt();
@@ -150,6 +150,10 @@ public class Executable {
 
 		controller.seeProjects();
 
+	}
+
+	public void infoProjects(){
+		controller.showstages();
 	}
 
 

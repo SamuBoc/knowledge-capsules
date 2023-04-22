@@ -67,27 +67,29 @@ public class Controller {
 		for(int i = 0; i < project.length; i++){
 
 			if (project[i] != null) {
-			System.out.println((i+1) + "-" + project[i].getProjectName());
+			System.out.println((i+1) + "- " + project[i].getProjectName());
 		
 		}
 		}
 
 		return false;
 	}
-	public String showstages(){
+
+	public boolean showstages(){
+		
 		//1. proyecto
 		// etapa: 
-		String msg = "no";
-
+		
 		for(int i = 0; i <project.length; i++){
 		if (project[i] != null){
 
-		msg = "\n" + i+1 + project[i].getProjectName() + " \n Stage: " + project[i].showActive();
-		return msg = "hola";		
+		System.out.println("\n" + (i+1) + "- " + project[i].getProjectName() + " \n Stage: " + project[i].showActive());
+				
 	}
 
 	}
-		return msg = "nada mano";
+		
+		return true;
 	}
 
 	public void testProject(){
