@@ -52,17 +52,17 @@ public class Projects {
         this.projectStages = new ProjectStage[6];
         
         // inititation
-        nextStage(iDayP, iMouthP, iYearP, 0, 0, 0, iDayP, iMouthP, iMouthP, 0, 0, 0, 0, true, sName[0]);
+        createStage(iDayP, iMouthP, iYearP, 0, 0, 0, iDayP, iMouthP, iMouthP, 0, 0, 0, 0, true, sName[0]);
         // planning
-        nextStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[1]);
+        createStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[1]);
         // desing
-        nextStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[2]);
+        createStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[2]);
         // execution
-        nextStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[3]);
+        createStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[3]);
         // closure
-        nextStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[4]);
+        createStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[4]);
         // monitoring and control
-        nextStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[5]);
+        createStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[5]);
 
         this.projectName = projectName;
         this.clientName = clientName;
@@ -80,7 +80,7 @@ public class Projects {
 
     }
 
-    public boolean nextStage(int iInitalPlanned, int mInitalPlanned, int yInitialPlanned, int dFinalPlanned,
+    public boolean createStage(int iInitalPlanned, int mInitalPlanned, int yInitialPlanned, int dFinalPlanned,
             int mFinalPlanned, int yFinalPlanned, int dInitalReal, int mInitialReal, int yInitialReal, int dFinalReal,
             int mFinalReal, int yFinalReal, int durationMonths, boolean isActive, String nameStage) {
 
@@ -88,23 +88,33 @@ public class Projects {
                 mFinalPlanned, yFinalPlanned, dInitalReal, mInitialReal, yInitialReal, dFinalReal, mFinalReal,
                 yFinalReal, durationMonths, isActive, nameStage);
 
-        int position = 0;
-
-        for (int i = 0; i < 6; i++) {
-
-            
-
+        for (int i = 0; i < projectStages.length; i++) {
+            if (projectStages[i] == null) {
+            projectStages[i] = miStage; 
+            return true;
+            }
         }
 
         return false;
     }
 
-    // for(int i = 0; i < stages.length; i++){
-    // if(newProject == true){
-    // stages[i] = newStage;
-    // return true;
-    // }
-    // }
+    public String showActive() {
+        if (projectStages == null) {
+            return "No stages defined";
+        }
+    
+        for (int i = 0; i < 6; i++) {
+            if (projectStages[i].getisActive() == true) {
+                return sName[i];
+            }
+        }
+        
+        return "No active stages";
+    }
+    
+    
+    
+
 
     public String getProjectName() {
         return projectName;

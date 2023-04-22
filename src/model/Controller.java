@@ -44,8 +44,7 @@ public class Controller {
 
 		int position = 0;
 
-		approved(fDayStage, fMouthStage, fYearStage, iDay, iMouth, iYear, durationMonths, fDay, fMouth, fYear, iDay,
-				iMouth, iYear, false, position);
+		approved(fDayStage, fMouthStage, fYearStage, iDay, iMouth, iYear, durationMonths, fDay, fMouth, fYear, iDay, iMouth, iYear, false, position);
 
 		return false;
 	}
@@ -67,34 +66,29 @@ public class Controller {
 
 		for(int i = 0; i < project.length; i++){
 
+			if (project[i] != null) {
 			System.out.println((i+1) + "-" + project[i].getProjectName());
-
+		
+		}
 		}
 
 		return false;
 	}
+	public String showstages(){
+		//1. proyecto
+		// etapa: 
+		String msg = "no";
 
-	public boolean seeActiveStage(int searchProject){
+		for(int i = 0; i <project.length; i++){
+		if (project[i] != null){
 
-		for(int i = 0; i<6; i++){
-
-			
-
-		}
-
-
-		return false;
+		msg = "\n" + i+1 + project[i].getProjectName() + " \n Stage: " + project[i].showActive();
+		return msg = "hola";		
 	}
-	
 
-// public void testCases() {
-
-// capsules[0] = new KnowledgeUnit("A001", "Gestion de repositorios", "Tecnico",
-// "GitHub es una herramienta util");
-// capsules[1] = new KnowledgeUnit("A002", "Gestion de equipos", "Experiencias",
-// "Es importante definir responsabilidades claras");
-
-// }
+	}
+		return msg = "nada mano";
+	}
 
 	public void testProject(){
 
