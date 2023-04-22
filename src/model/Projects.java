@@ -1,7 +1,10 @@
 package model;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.text.DateFormat;
 
 import javax.swing.text.Position;
 
@@ -18,14 +21,16 @@ public class Projects {
     private String clientName;
 
     // initial date of the project
-    private int iDayP;
-    private int iMouthP;
-    private int iYearP;
+    private Calendar initialPlanned;
 
     // final date of the project
-    private int fDayP;
-    private int fMouthP;
-    private int fYearP;
+    private Calendar finalPlanned;
+
+    // initial date of the project
+    private Calendar initialReal;
+
+    // final date of the project
+    private Calendar finalReal;
 
     // budget of the project
     private Double budget;
@@ -42,6 +47,8 @@ public class Projects {
     // phone number of the GreenSQ client
     private int greenPhone;
 
+    private DateFormat formatter;
+
     // Create Objet Stage
     private ProjectStage projectStage;
 
@@ -49,31 +56,36 @@ public class Projects {
 
     private String[] sName = { "initiation", "planning", "design", "execution", "closure", "monitoring and control" };
 
-    public Projects(String projectName, String clientName, Double budget, String managName, String greenName, int clientPhone, int greenPhone, int iDayP, int iMouthP, int iYearP, int fDayP, int fMouthP, int fYearP) {
+    Calendar now = Calendar.getInstance();
+    int actualDay = now.get(Calendar.DAY_OF_MONTH);
+	int actualmonth = now.get(Calendar.MONTH) + 1;
+    int actualyear = now.get(Calendar.YEAR);
+    Calendar actualDate = new GregorianCalendar(actualyear, actualmonth-1, actualDay);
+
+    public Projects(String projectName, String clientName, Double budget, String managName, String greenName, int clientPhone, int greenPhone, Calendar initialPlaneed, Calendar finalPlanned, int durationMonths, Calendar finalStage) {
 
         this.projectStages = new ProjectStage[6];
         
         // inititation
-        createStage(iDayP, iMouthP, iYearP, 0, 0, 0, iDayP, iMouthP, iMouthP, 0, 0, 0, 0, true, sName[0]);
+        createStage(initialPlaneed, finalStage, 0, true, sName[0]);
         // planning
-        createStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[1]);
+        createStage(finalPlanned, null, 0, false, sName[1]);
         // desing
-        createStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[2]);
+        createStage(null, null, 0, false, sName[2]);
         // execution
-        createStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[3]);
+        createStage(null, null, 0, false, sName[3]);
         // closure
-        createStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[4]);
+        createStage(null, null, 0, false, sName[4]);
         // monitoring and control
-        createStage(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, false, sName[5]);
+        createStage(null, finalPlanned, 0, false, sName[5]);
 
+        this.formatter = new SimpleDateFormat("dd/MM/yy");
         this.projectName = projectName;
         this.clientName = clientName;
-        this.iDayP = iDayP;
-        this.iMouthP = iMouthP;
-        this.iYearP = iYearP;
-        this.fDayP = fDayP;
-        this.fYearP = fYearP;
-        this.fMouthP = fMouthP;
+        this.initialPlanned = initialPlanned;
+		this.finalPlanned = finalPlanned;
+		this.initialReal = null;
+		this.finalReal = null;
         this.budget = budget;
         this.managName = managName;
         this.greenName = greenName;
@@ -82,13 +94,9 @@ public class Projects {
 
     }
 
-    public boolean createStage(int iInitalPlanned, int mInitalPlanned, int yInitialPlanned, int dFinalPlanned,
-            int mFinalPlanned, int yFinalPlanned, int dInitalReal, int mInitialReal, int yInitialReal, int dFinalReal,
-            int mFinalReal, int yFinalReal, int durationMonths, boolean isActive, String nameStage) {
+    public boolean createStage(Calendar initialPlanned, Calendar finalPlanned, int durationMonths, boolean isActive,String nameStage) {
 
-        ProjectStage miStage = new ProjectStage(iInitalPlanned, mInitalPlanned, yInitialPlanned, dFinalPlanned,
-                mFinalPlanned, yFinalPlanned, dInitalReal, mInitialReal, yInitialReal, dFinalReal, mFinalReal,
-                yFinalReal, durationMonths, isActive, nameStage);
+        ProjectStage miStage = new ProjectStage( initialPlanned,  finalPlanned, durationMonths,  isActive, nameStage);
 
         for (int i = 0; i < projectStages.length; i++) {
             if (projectStages[i] == null) {
@@ -114,8 +122,38 @@ public class Projects {
         return "No active stages";
     }
     
-    
-    
+    public Boolean CulminateStage(Calendar finalPlanned, int monthsPlanned){
+
+        for(int i = 0; i<6; i++){
+
+            if(projectStages[i].getisActive() == true){
+                if(i == 6){
+
+                    System.out.println("Finish the project");
+                    return false;
+
+                }else{
+                projectStages[(i)].setActive(false);
+                
+                projectStages[(i)].setFinalReal(actualDate);
+
+                projectStages[(i+1)].setActive(true); 
+
+                projectStages[(i+1)].setInitialReal(actualDate);
+
+                projectStages[(i+1)].setFinalPlanned(finalPlanned);
+
+                projectStages[(i+1)].setDurationMonths(monthsPlanned);
+
+                break;
+            }
+            }
+
+        }
+
+        return false;
+    }
+
 
 
     public String getProjectName() {
@@ -134,25 +172,54 @@ public class Projects {
         this.clientName = clientName;
     }
 
-    public int getiMouthp() {
-        return iMouthP;
-    }
+    public String getInitialRealFormated() throws ParseException{
+		return formatter.format(this.initialReal.getTime()); 
+	}
 
-    public int getiDayP() {
-        return iDayP;
-    }
 
-    public int getiYearP() {
-        return iYearP;
-    }
+	public String getFinalRealFormated() throws ParseException{
+		return formatter.format(this.finalReal.getTime());
+	}
 
-    public int getfMouthP() {
-        return fMouthP;
-    }
+	public String getInitialPlannedFormated() throws ParseException{
+		return formatter.format(this.initialPlanned.getTime());
+	}
 
-    public int getfDayP() {
-        return fDayP;
-    }
+
+	public String getFinalDatePFormated() throws ParseException{
+		return formatter.format(this.finalPlanned.getTime());
+	}
+    public Calendar getInitialPlanned() {
+		return initialPlanned;
+	}
+
+	public void setInitialDateP(Calendar initialPlanned) {
+		this.initialPlanned = initialPlanned;
+	}
+
+	public Calendar getFinalPlanned() {
+		return finalPlanned;
+	}
+
+	public void setFinalPlanned(Calendar finalPlanned) {
+		this.finalPlanned = finalPlanned;
+	}
+
+	public Calendar getInitialReal() {
+		return initialReal;
+	}
+
+	public void setInitialReal(Calendar initialReal) {
+		this.initialReal = initialReal;
+	}
+
+	public Calendar getFinalReal() {
+		return finalReal;
+	}
+
+	public void setFinalReal(Calendar finalReal) {
+		this.finalReal = finalReal;
+	}
 
     public Double getBudget() {
         return budget;

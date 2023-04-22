@@ -51,11 +51,11 @@ public class Executable {
 				break;
 
 			case 2:
-				seeProjects();
+				infoProjects();
 				break;
 
 			case 3:
-				infoProjects();
+				nextStage();
 				break;
 
 			case 4:
@@ -156,5 +156,24 @@ public class Executable {
 		controller.showstages();
 	}
 
+	public void nextStage(){
+
+		infoProjects();
+		System.out.println("Which project would you like to move on to the next stage?");
+		int position = reader.nextInt();
+		position = -1;
+		System.out.println("Then enter the data for the planned completion date");
+		System.out.println("Day(dd)");
+		int day = reader.nextInt();
+		System.out.println("Month(MM)");
+		int month = reader.nextInt();
+		System.out.println("Year(yyyy)");
+		int year = reader.nextInt();
+		System.out.println("How many months can the project last?");
+		int monthsPlanned = reader.nextInt();
+
+		controller.approved(position, day, month, year, monthsPlanned);
+
+	}
 
 }

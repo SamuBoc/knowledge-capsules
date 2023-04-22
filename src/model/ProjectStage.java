@@ -1,6 +1,10 @@
 package model;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.print.DocFlavor.STRING;
 
@@ -14,39 +18,26 @@ public class ProjectStage {
 
     }
 
-    private int iInitalPlanned;
-    private int mInitalPlanned;
-    private int yInitialPlanned;
-    private int dFinalPlanned;
-    private int mFinalPlanned;
-    private int yFinalPlanned;
-    private int dInitalReal;
-    private int mInitialReal;
-    private int yInitialReal;
-    private int dFinalReal;
-    private int mFinalReal;
-    private int yFinalReal;
+    private Calendar initialPlanned;
+    private Calendar finalPlanned;
+    private Calendar initialReal;
+    private Calendar finalReal;
+    private DateFormat formatter;
     private int durationMonths;
     private boolean isActive;
     private String nameStage;
 
 //
 
-    public ProjectStage(int iInitalPlanned, int mInitalPlanned, int yInitialPlanned, int dFinalPlanned, int mFinalPlanned, int yFinalPlanned, int dInitalReal, int mInitialReal, int yInitialReal,int dFinalReal, int mFinalReal, int yFinalReal, int durationMonths, boolean isActive,String nameStage){
+    public ProjectStage(Calendar initialPlanned, Calendar finalPlanned, int durationMonths, boolean isActive,String nameStage){
         
 
-        this.iInitalPlanned = iInitalPlanned;
-        this.mInitalPlanned = mInitalPlanned;
-        this.yInitialPlanned = yInitialPlanned;
-        this.dFinalPlanned = dFinalPlanned;
-        this.mFinalPlanned = mFinalPlanned;
-        this.yFinalPlanned = yFinalPlanned;
-        this.dInitalReal = dInitalReal;
-        this.mInitialReal = mInitialReal;
-        this.yInitialReal = yInitialReal;
-        this.dFinalReal = dFinalReal;
-        this.mFinalReal = mFinalReal;
-        this.yFinalReal = yFinalReal;
+        
+        this.formatter = new SimpleDateFormat("dd/MM/yy");
+        this.initialPlanned = initialPlanned;
+		this.finalPlanned = finalPlanned;
+		this.initialReal = null;
+		this.finalReal = null;
         this.durationMonths = durationMonths;
         this.isActive = isActive;
         this.nameStage = nameStage;
@@ -209,101 +200,55 @@ public class ProjectStage {
 //	}
 //
 
-    public int getiInitalPlanned() {
-        return iInitalPlanned;
-    }
-    
-    public void setiInitalPlanned(int iInitalPlanned) {
-        this.iInitalPlanned = iInitalPlanned;
-    }
-    
-    public int getmInitalPlanned() {
-        return mInitalPlanned;
-    }
-    
-    public void setmInitalPlanned(int mInitalPlanned) {
-        this.mInitalPlanned = mInitalPlanned;
-    }
-    
-    public int getyInitialPlanned() {
-        return yInitialPlanned;
-    }
-    
-    public void setyInitialPlanned(int yInitialPlanned) {
-        this.yInitialPlanned = yInitialPlanned;
-    }
-    
-    public int getdFinalPlanned() {
-        return dFinalPlanned;
-    }
-    
-    public void setdFinalPlanned(int dFinalPlanned) {
-        this.dFinalPlanned = dFinalPlanned;
-    }
-    
-    public int getmFinalPlanned() {
-        return mFinalPlanned;
-    }
-    
-    public void setmFinalPlanned(int mFinalPlanned) {
-        this.mFinalPlanned = mFinalPlanned;
-    }
-    
-    public int getyFinalPlanned() {
-        return yFinalPlanned;
-    }
-    
-    public void setyFinalPlanned(int yFinalPlanned) {
-        this.yFinalPlanned = yFinalPlanned;
-    }
-    
-    public int getdInitalReal() {
-        return dInitalReal;
-    }
-    
-    public void setdInitalReal(int dInitalReal) {
-        this.dInitalReal = dInitalReal;
-    }
-    
-    public int getmInitialReal() {
-        return mInitialReal;
-    }
-    
-    public void setmInitialReal(int mInitialReal) {
-        this.mInitialReal = mInitialReal;
-    }
-    
-    public int getyInitialReal() {
-        return yInitialReal;
-    }
-    
-    public void setyInitialReal(int yInitialReal) {
-        this.yInitialReal = yInitialReal;
-    }
-    
-    public int getdFinalReal() {
-        return dFinalReal;
-    }
-    
-    public void setdFinalReal(int dFinalReal) {
-        this.dFinalReal = dFinalReal;
-    }
-    
-    public int getmFinalReal() {
-        return mFinalReal;
-    }
-    
-    public void setmFinalReal(int mFinalReal) {
-        this.mFinalReal = mFinalReal;
-    }
-    
-    public int getyFinalReal() {
-        return yFinalReal;
-    }
-    
-    public void setyFinalReal(int yFinalReal) {
-        this.yFinalReal = yFinalReal;
-    }
+   
+public String getInitialRealFormated() throws ParseException{
+		return formatter.format(this.initialReal.getTime()); 
+	}
+
+
+	public String getFinalRealFormated() throws ParseException{
+		return formatter.format(this.finalReal.getTime());
+	}
+
+	public String getInitialPlannedFormated() throws ParseException{
+		return formatter.format(this.initialPlanned.getTime());
+	}
+
+
+	public String getFinalDatePFormated() throws ParseException{
+		return formatter.format(this.finalPlanned.getTime());
+	}
+    public Calendar getInitialPlanned() {
+		return initialPlanned;
+	}
+
+	public void setInitialDateP(Calendar initialPlanned) {
+		this.initialPlanned = initialPlanned;
+	}
+
+	public Calendar getFinalPlanned() {
+		return finalPlanned;
+	}
+
+	public void setFinalPlanned(Calendar finalPlanned) {
+		this.finalPlanned = finalPlanned;
+	}
+
+	public Calendar getInitialReal() {
+		return initialReal;
+	}
+
+	public void setInitialReal(Calendar initialReal) {
+		this.initialReal = initialReal;
+	}
+
+	public Calendar getFinalReal() {
+		return finalReal;
+	}
+
+	public void setFinalReal(Calendar finalReal) {
+		this.finalReal = finalReal;
+	}
     
     public int getDurationMonths() {
         return durationMonths;
