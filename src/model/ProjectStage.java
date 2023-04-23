@@ -5,18 +5,15 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.print.DocFlavor.STRING;
 
 public class ProjectStage {
  
+    
     private KnowledgeUnit[] capsules;
 
-    public ProjectStage() {
-        
-        capsules = new KnowledgeUnit[50];
-
-    }
 
     private Calendar initialPlanned;
     private Calendar finalPlanned;
@@ -27,10 +24,13 @@ public class ProjectStage {
     private boolean isActive;
     private String nameStage;
 
-//
+    Calendar now = Calendar.getInstance();
+    int actualDay = now.get(Calendar.DAY_OF_MONTH);
+	int actualmonth = now.get(Calendar.MONTH) + 1;
+    int actualyear = now.get(Calendar.YEAR);
+    Calendar actualDate = new GregorianCalendar(actualyear, actualmonth-1, actualDay);
 
-    public ProjectStage(Calendar initialPlanned, Calendar finalPlanned, int durationMonths, boolean isActive,String nameStage){
-        
+    public ProjectStage(Calendar initialPlanned, Calendar finalPlanned, Calendar initialReal, int durationMonths, boolean isActive,String nameStage){
 
         
         this.formatter = new SimpleDateFormat("dd/MM/yy");
@@ -41,33 +41,48 @@ public class ProjectStage {
         this.durationMonths = durationMonths;
         this.isActive = isActive;
         this.nameStage = nameStage;
+        capsules = new KnowledgeUnit[50];
     }
     
 
-    public boolean registerKnowledgeUnit(String id, String description, int type, String learnedLessons) {
+    public boolean registerNewKnowledgeUnit(String id, String description, int typeknowledge, String nameAuthor, String learnedLessons, String chargeAuthor) {
 
-		String typeKU = "";
 
-		if (type == 1) {
-			typeKU = "Tecnico";
-		} else {
-			typeKU = "Experiencias";
-		}
+        // public KnowledgeUnit(String id, String description, int typeknowledge, String nameAuthor, String learnedLessons, String chargeAuthor) {
 
-		KnowledgeUnit newKU = new KnowledgeUnit(id, description, typeKU, learnedLessons);
 
-		for (int i = 0; i < capsules.length; i++) {
 
-			if (capsules[i] == null) {
-				capsules[i] = newKU;
-				return true;
+		KnowledgeUnit newKU = new KnowledgeUnit(id, description, typeknowledge, nameAuthor, description, nameAuthor);
 
-			}
+		for (int i = 0; i < 50; i++) {
+            if (capsules[i] == null) {
+                 
+                capsules[i] = newKU;
+                System.out.println("hola");
+            return true;    
+            
+            }
 
-		}
+        }
 
 		return false;
 	}
+
+    public String setHashtag(String input) {
+        String[] parts = input.split("##");
+        StringBuilder hashtagBuilder = new StringBuilder();
+        for (String part : parts) {
+            if (part.startsWith("#")) {
+                if (hashtagBuilder.length() > 0) {
+                    hashtagBuilder.append(", ");
+                }
+                hashtagBuilder.append(part);
+            }
+        }
+        input = hashtagBuilder.toString();
+
+        return input;
+    }
 
 	public String getAllKnwoledgeUnits() {
 
@@ -85,20 +100,6 @@ public class ProjectStage {
 
 	}
 
-	public int approveKnowledgeUnit(int position, int status) {
-
-		if (status == 1) {
-
-			capsules[position].setStatus("Aprobada");
-
-		} else {
-			capsules[position].setStatus("No aprobada");
-
-		}
-
-		return status;
-
-	}
 
 	public String getKnowledgeUnitsList() {
 

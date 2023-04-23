@@ -39,8 +39,9 @@ public class Executable {
 			System.out.println("\n1. Register project");
 			System.out.println("2. Shows all projects");
 			System.out.println("3. Next Stage");
-			System.out.println("4. Salir");
-			System.out.println("5. Consultar todas las capsulas de conocimiento registradas");
+			System.out.println("4. Register knowledge capsule");
+			System.out.println("5. Approve knowledge capsule");
+			System.out.println("6. Consultar todas las capsulas de conocimiento registradas");
 			
 			int option = reader.nextInt();
 
@@ -59,8 +60,16 @@ public class Executable {
 				break;
 
 			case 4:
-				flag = true;
+				registerKnowledgeUnit();
 				break;
+			
+			case 5:
+				approveKnowledgeUnit();
+				break;
+
+			case 6:
+			flag = true;
+			
 
 			}
 
@@ -172,7 +181,57 @@ public class Executable {
 		System.out.println("How many months can the project last?");
 		int monthsPlanned = reader.nextInt();
 
-		controller.approved(position, day, month, year, monthsPlanned);
+		if(controller.approved(position, day, month, year, monthsPlanned)){
+			System.out.println("the next stage was registered ! :D");
+		}else{
+			System.out.println("There was a problem");
+		}
+
+	}
+
+
+	public void registerKnowledgeUnit(){
+
+		infoProjects();
+		System.out.println("\n Which project would you like to register a new capsule for?");
+		int position = reader.nextInt();
+		position = -1;
+		System.out.println("You will then be asked about the characteristics of the capsule. \n");
+		System.out.println("type of capsule: \n 1.TECHNICIAN  \n 2.GESTION \n 3.DOMAIN \n 4. EXPERIENCES");
+		int capsuleType = reader.nextInt();
+		System.out.println("identifier: ");
+		reader.nextLine(); // Consumir el carácter \n adicional
+		String id = reader.nextLine();
+		System.out.println("author's name: ");
+		String authorName = reader.nextLine();
+		System.out.println("descripcion: ");
+		String descripcion = reader.nextLine();
+		System.out.println("what is the lesson learned?");
+		String lessonKnow = reader.nextLine(); 
+		System.out.println("what is the charge author's?");
+		String chargeAuthors = reader.nextLine(); 
+		
+		if(controller.registerKnowledgeUnit(position, capsuleType, id, authorName, descripcion, lessonKnow, chargeAuthors)){
+
+			System.out.println("knowledge capsule has been created :D");
+		}else{
+			System.out.println("There was a problem :(");
+		}
+
+	}
+
+	public void approveKnowledgeUnit(){
+
+		infoProjects();
+   	    System.out.println("\n which project would you like to approve the capsule for? "); 
+		 int position = reader.nextInt();
+		 controller.showKnowledge(position);
+
+	}
+
+	public void infoKnowledge(){
+
+		
 
 	}
 

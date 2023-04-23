@@ -7,6 +7,7 @@ import javax.swing.text.Position;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javafx.beans.binding.When.BooleanConditionBuilder;
 import javafx.stage.Stage;
 
 public class Controller {
@@ -87,25 +88,40 @@ public class Controller {
 		return false;
 	}
 
+	public boolean showKnowledge(int position){
+
+		position = position--;
+
+		System.out.println(position++ + " - " + project[position].getsName()  + " has a " + project[position].getProjectStages());
+
+		return false;
+	}
+
 	public boolean showstages(){
-		
-		//1. proyecto
-		// etapa: 
 		
 		for(int i = 0; i <project.length; i++){
 		if (project[i] != null){
 
 		System.out.println("\n" + (i+1) + "- " + project[i].getProjectName() + " \n Stage: " + project[i].showActive());
-				
-	}
-
-	}
+			
+			}
+		}
 		
 		return true;
 	}
 
+	public boolean registerKnowledgeUnit(int position, int capsuleType, String id, String authorName, String descripcion, String lessonKnow, String chargeAuthors){
 
+		if(position < 0){
+			position++; 
+		}else{
 
+		project[position].registerKnowledgeUnitProject(id, descripcion, capsuleType,authorName, lessonKnow, chargeAuthors);
+				return true;
+		}
+		
+		return false;
+	}
 
 	public void testProject(){
 
@@ -114,6 +130,11 @@ public class Controller {
      	Calendar initialFinal = new GregorianCalendar(2005, 11-1, 04);    
         Calendar finalStage = new GregorianCalendar(2001, 6-1, 04);
 		project[0]= new Projects("Prueba 1", "Jhon", 3232.2, "Logan", "Juan", 30056789, 43433, initialPlanned, initialFinal, 28, finalStage);
+
+		registerKnowledgeUnit(0, 2, "ssa", "Patricio", "Esta capsula sirve para muchas cosas #importantes# porque almacena #ideas#", "la leccion que aprendi es #no decir cosas malas# porque estas pueden meterme en problemas", "Jefe");
+
+		//registerKnowledgeUnit(1, 2, "nnt", "Kevin", "El proceso de desarrollo de las aplicaciones tiene #metodos en cada clase#, claro en general esto se usa bien, pero hay maneras de no usarse bien", "Por ende aprendi que #es importnate saber sobre diagramas de clase#", "Npc");
+
 		
 		Calendar initialPlanned2 = new GregorianCalendar(2023, 5-1, 1);
 		Calendar initialFinal2 = new GregorianCalendar(2023, 6-1, 30);

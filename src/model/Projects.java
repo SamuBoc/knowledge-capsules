@@ -8,6 +8,8 @@ import java.text.DateFormat;
 
 import javax.swing.text.Position;
 
+import org.omg.CORBA.FloatSeqHelper;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javafx.stage.Stage;
@@ -67,17 +69,17 @@ public class Projects {
         this.projectStages = new ProjectStage[6];
         
         // inititation
-        createStage(initialPlaneed, finalStage, 0, true, sName[0]);
+        createStage(initialPlaneed, finalStage, null, durationMonths, true, sName[0]);
         // planning
-        createStage(finalPlanned, null, 0, false, sName[1]);
+        createStage(finalPlanned, null, null, 0,false, sName[1]);
         // desing
-        createStage(null, null, 0, false, sName[2]);
+        createStage(null, null, null,0, false, sName[2]);
         // execution
-        createStage(null, null, 0, false, sName[3]);
+        createStage(null, null, null, 0, false, sName[3]);
         // closure
-        createStage(null, null, 0, false, sName[4]);
+        createStage(null, null, null, 0 , false, sName[4]);
         // monitoring and control
-        createStage(null, finalPlanned, 0, false, sName[5]);
+        createStage(null, finalPlanned, null, 0, false, sName[5]);
 
         this.formatter = new SimpleDateFormat("dd/MM/yy");
         this.projectName = projectName;
@@ -94,9 +96,9 @@ public class Projects {
 
     }
 
-    public boolean createStage(Calendar initialPlanned, Calendar finalPlanned, int durationMonths, boolean isActive,String nameStage) {
+    public boolean createStage(Calendar initialPlanned, Calendar finalPlanned, Calendar initialReal, int durationMonths, boolean isActive,String nameStage) {
 
-        ProjectStage miStage = new ProjectStage( initialPlanned,  finalPlanned, durationMonths,  isActive, nameStage);
+        ProjectStage miStage = new ProjectStage(  initialPlanned,  finalPlanned,  initialReal,  durationMonths,  isActive, nameStage);
 
         for (int i = 0; i < projectStages.length; i++) {
             if (projectStages[i] == null) {
@@ -109,6 +111,7 @@ public class Projects {
     }
 
     public String showActive() {
+
         if (projectStages == null) {
             return "No stages defined";
         }
@@ -154,7 +157,21 @@ public class Projects {
         return false;
     }
 
+    public boolean registerKnowledgeUnitProject(String id, String description, int typeknowledge, String nameAuthor, String learnedLessons, String chargeAuthor){
 
+        for(int i = 0; i<6; i++){
+
+            if(projectStages[i].getisActive() == true){
+
+                projectStages[i].registerNewKnowledgeUnit(id, description, typeknowledge, nameAuthor, learnedLessons, chargeAuthor);
+
+                return true;
+            }
+
+        }
+
+        return false;
+    }
 
     public String getProjectName() {
         return projectName;
@@ -261,20 +278,20 @@ public class Projects {
         this.greenPhone = greenPhone;
     }
 
-    public ProjectStage[] getProjectStages() {
-        return projectStages;
-    }
-
-    public void setprojectStages(ProjectStage[] projectStages) {
-        this.projectStage = projectStage;
-    }
-
     public String[] getsName() {
         return sName;
     }
 
     public void setsName(String[] sName) {
         this.sName = sName;
+    }
+
+    public ProjectStage[] getProjectStages() {
+        return projectStages;
+    }
+
+    public void setProjectStages(ProjectStage[] projectStages) {
+        this.projectStages = projectStages;
     }
 
 }
