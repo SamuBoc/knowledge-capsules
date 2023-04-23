@@ -57,6 +57,8 @@ public class Controller {
 		
 		Calendar finalPlanned = new GregorianCalendar(fYear, fMouth-1, fDay);
 
+		position--;
+
 		if(position < 0){
 			position++; 
 		}
@@ -88,11 +90,15 @@ public class Controller {
 		return false;
 	}
 
-	public boolean showKnowledge(int position){
+	public boolean showKnowledge(int position, int capsulePosition){
 
-		position = position--;
+		position--;
 
-		System.out.println(position++ + " - " + project[position].getsName()  + " has a " + project[position].getProjectStages());
+
+
+		if(project[position].showCapsul(capsulePosition)){
+			return true;
+		}
 
 		return false;
 	}
@@ -111,6 +117,8 @@ public class Controller {
 	}
 
 	public boolean registerKnowledgeUnit(int position, int capsuleType, String id, String authorName, String descripcion, String lessonKnow, String chargeAuthors){
+
+		position = position - 1;
 
 		if(position < 0){
 			position++; 
@@ -133,7 +141,7 @@ public class Controller {
 
 		registerKnowledgeUnit(0, 2, "ssa", "Patricio", "Esta capsula sirve para muchas cosas #importantes# porque almacena #ideas#", "la leccion que aprendi es #no decir cosas malas# porque estas pueden meterme en problemas", "Jefe");
 
-		//registerKnowledgeUnit(1, 2, "nnt", "Kevin", "El proceso de desarrollo de las aplicaciones tiene #metodos en cada clase#, claro en general esto se usa bien, pero hay maneras de no usarse bien", "Por ende aprendi que #es importnate saber sobre diagramas de clase#", "Npc");
+		registerKnowledgeUnit(1, 2, "nnt", "Kevin", "El proceso de desarrollo de las aplicaciones tiene #metodos en cada clase#, claro en general esto se usa bien, pero hay maneras de no usarse bien", "Por ende aprendi que #es importnate saber sobre diagramas de clase#", "Npc");
 
 		
 		Calendar initialPlanned2 = new GregorianCalendar(2023, 5-1, 1);
@@ -143,5 +151,15 @@ public class Controller {
 
 	}
 
+	public boolean approvedKnowledge(int position, int stage){
+
+		if(project[position] != null){
+
+			project[position].getProjectStages();
+
+		}
+
+		return false;
+	}
 
 }

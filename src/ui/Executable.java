@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import model.Controller;
 import java.util.Date;
+import java.nio.channels.ReadPendingException;
 import java.text.ParseException;
 
 
@@ -170,7 +171,6 @@ public class Executable {
 		infoProjects();
 		System.out.println("Which project would you like to move on to the next stage?");
 		int position = reader.nextInt();
-		position = -1;
 		System.out.println("Then enter the data for the planned completion date");
 		System.out.println("Day(dd)");
 		int day = reader.nextInt();
@@ -182,25 +182,23 @@ public class Executable {
 		int monthsPlanned = reader.nextInt();
 
 		if(controller.approved(position, day, month, year, monthsPlanned)){
-			System.out.println("the next stage was registered ! :D");
+			System.out.println("In the project (" + position + ")the next stage was registered ! :D");
 		}else{
 			System.out.println("There was a problem");
 		}
 
 	}
 
-
 	public void registerKnowledgeUnit(){
 
 		infoProjects();
 		System.out.println("\n Which project would you like to register a new capsule for?");
 		int position = reader.nextInt();
-		position = -1;
+		position--;
 		System.out.println("You will then be asked about the characteristics of the capsule. \n");
 		System.out.println("type of capsule: \n 1.TECHNICIAN  \n 2.GESTION \n 3.DOMAIN \n 4. EXPERIENCES");
 		int capsuleType = reader.nextInt();
 		System.out.println("identifier: ");
-		reader.nextLine(); // Consumir el carácter \n adicional
 		String id = reader.nextLine();
 		System.out.println("author's name: ");
 		String authorName = reader.nextLine();
@@ -213,7 +211,7 @@ public class Executable {
 		
 		if(controller.registerKnowledgeUnit(position, capsuleType, id, authorName, descripcion, lessonKnow, chargeAuthors)){
 
-			System.out.println("knowledge capsule has been created :D");
+			System.out.println("\n knowledge capsule has been created :D!");
 		}else{
 			System.out.println("There was a problem :(");
 		}
@@ -225,7 +223,17 @@ public class Executable {
 		infoProjects();
    	    System.out.println("\n which project would you like to approve the capsule for? "); 
 		 int position = reader.nextInt();
-		 controller.showKnowledge(position);
+ 		controller.showKnowledge(position, 0);
+		
+		System.out.println("select the capsule to approve") ;	
+		int capsulePosition = reader.nextInt();
+		
+		System.out.println("");
+		controller.approvedKnowledge(position, capsulePosition);
+
+		System.out.println("the knowledge capsule has been approved :D !");
+		
+		System.out.println("an error has occurred :(");
 
 	}
 

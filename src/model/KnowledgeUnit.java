@@ -17,7 +17,7 @@ public class KnowledgeUnit {
 	private String typeknowledege;
 	private String nameAuthor;
 	private String chargeAuthor;
-	private Revision revision;
+	private Boolean revision;
 	private DateFormat formatter;
 
 	Calendar now = Calendar.getInstance();
@@ -40,7 +40,7 @@ public class KnowledgeUnit {
 
 		//variables no outputs in the create
 		this.statusPrivacy = false;
-		this.revision = Revision.ENPROCESS;
+		this.revision = false;
 		
 
 
@@ -99,7 +99,7 @@ public class KnowledgeUnit {
         this.hashtagDescription = hashtagDescription;
     }
 
-    public boolean isStatusPrivacy() {
+    public boolean getStatusPrivacy() {
         return statusPrivacy;
     }
 
@@ -135,11 +135,11 @@ public class KnowledgeUnit {
         this.chargeAuthor = chargeAuthor;
     }
 
-    public Revision getRevision() {
+    public boolean getRevision() {
         return revision;
     }
 
-    public void setRevision(Revision revision) {
+    public void setRevision(Boolean revision) {
         this.revision = revision;
     }
 

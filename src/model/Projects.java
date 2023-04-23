@@ -173,6 +173,23 @@ public class Projects {
         return false;
     }
 
+
+    public boolean showCapsul(int capsulePosition){
+        for(int i=0; i<6; i++){
+            if(projectStages[i].getisActive() != false){
+                System.out.println("For the stage (" + sName[i] + ") these are the stages to be activated: \n " + projectStages[i].getKnowledgeUnitsList() );
+
+                
+
+            }else{
+
+                return false;
+            }
+        }
+        return false;
+    }
+
+
     public String getProjectName() {
         return projectName;
     }
